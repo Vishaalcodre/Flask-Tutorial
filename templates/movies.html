@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+<h1>
+    Hi I'm {{name}}
+</h1>
+<h2>
+    I would suggest these movies ->
+    <span>{{movies}}</span>
+</h2>
+<h2>
+    Don't miss these -> {{movies[1:4]}}
+</h2>
+<h2>
+    My Favourite -> {{movies[-1]}}
+</h2>
+
+<hr>
+
+<ul>
+    {% for movie in movies %}
+
+    <li>
+        {{movie}}
+    </li>
+
+<!-- In Jinja to end for loop we use this command instead of indentation -->
+    {% endfor %}
+</ul>
+
+</body>
+</html>

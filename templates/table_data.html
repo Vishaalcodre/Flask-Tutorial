@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Rating</title>
+</head>
+<body>
+<h1>
+  This collection belongs to {{name}}
+</h1>
+
+<table>
+    <tr>
+        <th>Movie</th>
+        <th>Rating</th>
+        <th>Comments</th>
+    </tr>
+
+    {% for movie, rating in movies.items() %}
+
+    <tr>
+        <td>{{movie}}</td>
+        <td>{{rating}}</td>
+
+        {% if rating < 4 %}
+
+        <td>Good</td>
+
+        {% else %}
+
+        <td>Awesome</td>
+
+<!-- In Jinja to end if condition we use this command instead of indentation -->
+        {% endif %}
+    </tr>
+
+    {% endfor %}
+
+</table>
+</body>
+</html>

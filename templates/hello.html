@@ -8,32 +8,5 @@
 <h1>
     Hello This is the rendered HTML file.
 </h1>
-<h2>
-    Hi I'm {{name}}
-</h2>
-<h3>
-    I would suggest these movies ->
-    <span>{{movies}}</span>
-</h3>
-<h3>
-    Don't miss these -> {{movies[1:4]}}
-</h3>
-<h3>
-    My Favourite -> {{movies[-1]}}
-</h3>
-
-<hr>
-
-<ul>
-    {% for movie in movies %}
-
-    <li>
-        {{movie}}
-    </li>
-
-<!-- In Jinja to end for loop we use this command instead of indentation -->
-    {% endfor %}
-</ul>
-
 </body>
 </html>

@@ -56,6 +56,8 @@ def using_templates():
 
 
 # JINJA TEMPLATES
+
+#For Condition
 @app.route('/watch')
 def top_movies():
     movie_list = ['autopsy of jane doe',
@@ -66,6 +68,18 @@ def top_movies():
                   'spiderman - homecoming']
 
     return render_template("hello.html", movies=movie_list, name="Praveen")
+
+#If-Else Condition
+@app.route('/movies')
+def movie_ratings():
+    movie_list = {'autopsy of jane doe': 2.5,
+                  'neon demon': 3.3,
+                  'ghost in a shell': 3.5,
+                  'kong: skull island': 4.0,
+                  'john wick 2': 4.5,
+                  'spiderman - homecoming': 4.7}
+
+    return render_template("table_data.html", movies= movie_list, name= "Vishal")
 
 if __name__ == "__main__":
     app.run(debug=True)

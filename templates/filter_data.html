@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Filters</title>
+</head>
+<body>
+<h1>
+  Working with jinja2 Filters
+</h1>
+
+<ul>
+  {% for movie, rating in movies|dictsort %}
+  <li>{{movie|title}}: {{rating|round(1)}}</li>
+  {% endfor %}
+</ul>
+<hr>
+
+<ol type="1">
+  <li> default type:      {{name|default('Invalid value', true)}}</li> <br>
+  <li> capital case:      {{film|capitalize}}</li> <br>
+  <li> length:            {{movies|length}} items in the dictionary</li> <br>
+  <li> first item:        {{movies|first}}</li> <br>
+  <li> make a list:       {{film|list}}</li> <br>
+  <li> replace a data:    {{film|replace('carol','cookie')|upper}}</li> <br>
+</ol>
+<hr>
+
+</body>
+</html>

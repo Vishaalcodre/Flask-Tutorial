@@ -95,5 +95,16 @@ def filter_data():
                            name=None,
                            film='a christmas carol')
 
+@app.route('/macros')
+def jinja_macros():
+    movie_dict = {'autopsy of jane doe': 2.5,
+                  'neon demon': 3.3,
+                  'ghost in a shell': 3.5,
+                  'kong: skull island': 4.0,
+                  'john wick 2': 4.5,
+                  'spiderman - homecoming': 4.7}
+
+    return render_template('using_macros.html', movies=movie_dict)
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,24 @@
+{% macro render_dict(dictionary) %}
+
+<table>
+    <tr>
+        <th>name</th>
+        <th>value</th>
+        <th>comments</th>
+    </tr>
+    {% for key, values in dictionary.items() %}
+        <tr>
+            <td>{{key}}</td>
+            <td>{{values}}</td>
+
+            {% if values < 4 %}
+                <td>Good</td>
+            {% else %}
+                <td>Awesome!</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+
+</table>
+
+{% endmacro %}

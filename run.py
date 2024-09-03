@@ -1,7 +1,18 @@
 from flask import Flask, request, render_template
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
+app.config["SQLALCHEMY_DATABASE_URI"]="postgresql+pg8000://postgres:root@localhost/catalog_db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
+
+# app.config.update(
+#     SECRET_KEY="root",
+#     SQLALCHEMY_DATABASE_URI="postgresql://postgres:root@localhost/catalog_db",
+#     SQLALCHEMY_TRACK_MODIFICATIONS=False
+# )
+
+db = SQLAlchemy(app)
 
 @app.route('/')
 def hello():
@@ -12,6 +23,7 @@ def hello():
 def greeting(greetings="hello"):
     value = request.args.get('greeting', greetings)
     return "<h1>This is the greeting: {0}</h1>".format(value)
+
 
 @app.route('/user/')
 @app.route('/user/<name>')
@@ -57,7 +69,7 @@ def using_templates():
 
 # JINJA TEMPLATES
 
-#For Condition
+# For Condition
 @app.route('/watch')
 def top_movies():
     movie_list = ['autopsy of jane doe',
@@ -69,7 +81,8 @@ def top_movies():
 
     return render_template("hello.html", movies=movie_list, name="Praveen")
 
-#If-Else Condition
+
+# If-Else Condition
 @app.route('/movies')
 def movie_ratings():
     movie_list = {'autopsy of jane doe': 2.5,
@@ -79,7 +92,8 @@ def movie_ratings():
                   'john wick 2': 4.5,
                   'spiderman - homecoming': 4.7}
 
-    return render_template("table_data.html", movies= movie_list, name= "Vishal")
+    return render_template("table_data.html", movies=movie_list, name="Vishal")
+
 
 @app.route('/filter')
 def filter_data():
@@ -95,6 +109,7 @@ def filter_data():
                            name=None,
                            film='a christmas carol')
 
+
 @app.route('/macros')
 def jinja_macros():
     movie_dict = {'autopsy of jane doe': 2.5,
@@ -106,5 +121,20 @@ def jinja_macros():
 
     return render_template('using_macros.html', movies=movie_dict)
 
+class Publication(db.Model):
+    __tablename__ = 'publication'
+
+    id = db.Column(db.Integer ,primary_key= True)
+    name = db.Column(db.String(80), nullable= False)
+
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+
+    def __repr__(self):
+        return "The id is {} and the Name is {}".format(self.id, self.name)
+
+
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)

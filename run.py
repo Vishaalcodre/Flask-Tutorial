@@ -1,11 +1,12 @@
 from datetime import datetime
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"]="postgresql+pg8000://postgres:root@localhost/catalog_db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
+app.config["SECRET_KEY"]="topsecret"
 
 # app.config.update(
 #     SECRET_KEY="root",
@@ -121,6 +122,13 @@ def jinja_macros():
                   'spiderman - homecoming': 4.7}
 
     return render_template('using_macros.html', movies=movie_dict)
+
+#Session
+@app.route('/session')
+def session_data():
+    if 'name' not in session:
+        session['name'] = 'praveen'
+    return render_template('session.html',session=session, name=session['name'])
 
 #Publication Table
 class Publication(db.Model):
